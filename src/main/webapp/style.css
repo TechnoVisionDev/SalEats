@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300&display=swap');
+
+html, body {
+   overflow-x: hidden;
+}
+ 
+body {
+   width:100%;
+   font-family: Roboto, sans-serif;
+}
+
+nav {
+    padding: 30px;
+    margin-bottom: 45px;
+    margin-right: 65px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.no-style {
+    text-decoration: none !important;
+    color: black;
+}
+
+#buttons {
+	margin-top: 30px;
+	margin-right: 38px;
+	float: right;
+}
+
+#home {
+	margin-right: 15px;
+}
+
+#logo {
+	font-family: Lobster;
+	color: #bb0000;
+	font-size: 50px;
+	font-weight: 80;
+	padding-left: 60px;
+}
+
+#header {
+	border-radius: 15px;
+	display: block;
+	width: 97%;
+	margin-bottom: 40px; 
+}
+
+* {
+  box-sizing: border-box;
+}
+
+main {
+	margin-left: 88px;
+	margin-right: 88px;
+}
+
+main .form-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 25px;
+}
+
+.form-container .column {
+ 	flex: 1;
+	min-width: 200px;
+}
+
+.form-container .column:last-of-type {
+ 	display: flex;
+ 	gap: 25px;
+}
+
+.radio-buttons-container {
+ 	display: flex;
+ 	flex-wrap: wrap;
+ 	gap: 75px;
+}
+
+
+#search_button {
+    height: 35px;
+    width: 60px;
+    border: 1px solid #ebebeb;
+    background-color: #bb0000;
+    font-size: 1em;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.textbox {
+	padding-left: 8px;
+    margin-bottom: 5px;
+    height: 35px;
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+}
+
+label {
+	color: grey;
+}
+
+footer {
+	margin-top: 100px;
+	text-align: center;
+}
