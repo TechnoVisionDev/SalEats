@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="781478761130-14fgtrr77tni1vtovttoih4dkjja3elu.apps.googleusercontent.com.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://kit.fontawesome.com/4b6d728af0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <title>SalEats</title>
@@ -21,34 +23,34 @@
   	<main>
   		<div class="login-form-container">
   			<div>
-	  			<form class="login-form">
+	  			<form class="login-form" action="AuthServlet" method="POST">
 	  				<h1>Login</h1>
 	  				<label>Email</label>
-	  				<input type="text" class="textbox">
+	  				<input type="text" class="textbox" name="email">
 	  				<label>Password</label>
-	  				<input type="text" class="textbox">
-	  				<button type="submit" class="login-button"><i class="fas fa-sign-in-alt"></i>Sign In</button>
+	  				<input type="text" class="textbox" name="password">
+	  				<button type="submit" name="login" class="login-button"><i class="fas fa-sign-in-alt"></i>Sign In</button>
 	  			</form>
 	  			<p id="divider"></p>
 	  			<button type="submit" id="google" class="login-button"><i class="fab fa-google"></i>Sign In with Google</button>
   			</div>
-  			<form class="login-form">
+  			<form class="login-form" action="AuthServlet" method="POST">
   				<h1>Register</h1>
   				<label>Email</label>
-  				<input type="text" class="textbox">
+  				<input type="text" class="textbox" name="email">
   				<label>Name</label>
-  				<input type="text" class="textbox">
+  				<input type="text" class="textbox" name="name">
   				<label>Password</label>
-  				<input type="text" class="textbox">
+  				<input type="text" class="textbox" name="password">
   				<label>Confirm Password</label>
-  				<input type="text" class="textbox">
+  				<input type="text" class="textbox" name="confirm_pass">
   				<div>
 	  				<label>
-	  					<input type="checkbox">
+	  					<input type="checkbox" name="terms">
 	  					I have read and agree to all terms and conditions of SalEats.
 	  				</label>
   				</div>
-  				<button type="submit" class="login-button"><i class="fas fa-user-plus"></i>Create Account</button>
+  				<button type="submit" name="register" class="login-button"><i class="fas fa-user-plus"></i>Create Account</button>
   			</form>
   		</div>
   	</main>
