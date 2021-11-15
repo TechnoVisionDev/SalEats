@@ -10,10 +10,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Handles backend authentication for login and registration.
+ * Handles user authentication for login and registration.
  * @author Thomas Peters
  */
-@WebServlet("/AuthServlet")
+@WebServlet("/auth")
 public class AuthServlet extends HttpServlet {
 	
 	public void init() throws ServletException {
