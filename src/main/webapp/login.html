@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/4b6d728af0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <title>SalEats</title>
   </head>
@@ -18,13 +19,38 @@
   		</nav>
   	</header>
   	<main>
-  	  	<form action="MyServlet" method="GET">
-			<label for="fname">First Name:</label>
-			<input type="text" name="first_name"> <br/>
-			<label for="lname">Last Name:</label>
-			<input type="text" name="last_name"> <br/><br/>	
-			<input type="submit" value="Submit">
-		</form>
+  		<div class="login-form-container">
+  			<div>
+	  			<form class="login-form">
+	  				<h1>Login</h1>
+	  				<label>Email</label>
+	  				<input type="text" class="textbox">
+	  				<label>Password</label>
+	  				<input type="text" class="textbox">
+	  				<button type="submit" class="login-button"><i class="fas fa-sign-in-alt"></i>Sign In</button>
+	  			</form>
+	  			<p id="divider"></p>
+	  			<button type="submit" id="google" class="login-button"><i class="fab fa-google"></i>Sign In with Google</button>
+  			</div>
+  			<form class="login-form">
+  				<h1>Register</h1>
+  				<label>Email</label>
+  				<input type="text" class="textbox">
+  				<label>Name</label>
+  				<input type="text" class="textbox">
+  				<label>Password</label>
+  				<input type="text" class="textbox">
+  				<label>Confirm Password</label>
+  				<input type="text" class="textbox">
+  				<div>
+	  				<label>
+	  					<input type="checkbox">
+	  					I have read and agree to all terms and conditions of SalEats.
+	  				</label>
+  				</div>
+  				<button type="submit" class="login-button"><i class="fas fa-user-plus"></i>Create Account</button>
+  			</form>
+  		</div>
   	</main>
   	<footer>
   		<p>&copy 2021 All Rights Reserved.</p>
