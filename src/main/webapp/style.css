@@ -1,18 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300&display=swap');
 
+* {
+	box-sizing: border-box;
+}
+
 html, body {
-   overflow-x: hidden;
+   	overflow-x: hidden;
 }
  
 body {
-   width:100%;
-   font-family: Roboto, sans-serif;
-   color: grey;
+   	width:100%;
+   	font-family: Roboto, sans-serif;
+  	color: grey;
 }
 
 nav {
-    padding: 30px;
+    padding: 20px 30px 30px 30px;
     margin-bottom: 45px;
     margin-right: 65px;
     border-bottom: 1px solid #ebebeb;
@@ -42,33 +46,27 @@ nav {
 	color: #bb0000;
 	font-size: 50px;
 	font-weight: 80;
-	padding-left: 60px;
+	padding-left: 70px;
 }
 
-#header {
+#banner {
+  	display: block;
+  	margin-left: auto;
+  	margin-right: auto;
+  	margin-bottom: 40px; 
 	border-radius: 15px;
-	display: block;
-	width: 97%;
-	margin-bottom: 40px; 
-}
-
-* {
-  box-sizing: border-box;
-}
-
-main {
-	margin-left: 88px;
-	margin-right: 88px;
+	width: 80%;
 }
 
 main .form-container {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	gap: 25px;
 }
 
 .form-container .column {
- 	flex: 1;
+ 	flex: 0.4;
 	min-width: 200px;
 }
 
@@ -146,6 +144,16 @@ main .form-container {
 
 .terms {
 	cursor: pointer;
+}
+
+.error-message {
+	color: #bb0000;
+	font-size: 12px;
+	margin: 0;
+}
+
+.form-header {
+	margin-bottom: 10px;
 }
 
 #divider {

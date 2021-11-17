@@ -1,4 +1,4 @@
-package backend;
+package servlets;
 
 import java.io.IOException;
 
@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/search")
 public class SearchServlet extends HttpServlet {
 	
+	private static final long serialVersionUID = 3901610548642762613L;
+
 	public void init() throws ServletException {
 		
 	}

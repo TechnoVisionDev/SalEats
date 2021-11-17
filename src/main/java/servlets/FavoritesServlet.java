@@ -1,7 +1,6 @@
-package backend;
+package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,6 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet("/favorites")
 public class FavoritesServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = -2309693395591887433L;
 	
 	public void init() throws ServletException {
 		
