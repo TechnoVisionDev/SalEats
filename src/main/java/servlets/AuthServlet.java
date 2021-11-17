@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.regex.Pattern;
 
 import data.Database;
 import data.User;
@@ -40,10 +41,10 @@ public class AuthServlet extends HttpServlet {
 			
 			// Server side validation
 			String errorMessage = null;
-			if (!verifyEmail(email)) {
-				errorMessage = "*Please enter a valid email address.";
+			if (!validEmail(email)) {
+				errorMessage = "*You must enter a valid email address.";
 			} else if (password.isBlank()) {
-				errorMessage = "*Please enter a password.";
+				errorMessage = "*You must enter a password.";
 			} else if (!db.validate(email, password)) {
 				errorMessage = "*Invalid email and password.";
 			} 
@@ -63,34 +64,43 @@ public class AuthServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			String password = request.getParameter("password");
 			String confirm_pass = request.getParameter("confirm_pass");
+			String terms = request.getParameter("terms");
 			
-			if (!password.equals(confirm_pass)) {
-				// Passwords did not match
-				request.setAttribute("registerError", "<p class=\"error-message\">*The passwords you entered do not match.</p>");
-				request.getRequestDispatcher("/login.jsp").forward(request, response);
-				return;
+			// Server side validation
+			String errorMessage = null;
+			if (!validEmail(email)) {
+				errorMessage = "*You must enter a valid email address.";
+			} else if (name.isBlank()) {
+				errorMessage = "*You must enter a name.";
+			} else if (password.isBlank()) {
+				errorMessage = "*You must enter a password.";
+			} else if (!password.equals(confirm_pass)) {
+				errorMessage = "*The passwords you entered do not match.";
+			} else if (terms == null) {
+				errorMessage = "*You must agree to the terms of service.";
+			} else {
+				try { db.registerUser(new User(email, name, password));
+				} catch (SQLIntegrityConstraintViolationException e) {
+					errorMessage = "*That email address is already in use.";
+				}
 			}
 			
-			try {
-				// Register user data with MySQL database
-				db.registerUser(new User(email, name, password));
-			} catch (SQLIntegrityConstraintViolationException e) {
-				// Email address already in database
-				request.setAttribute("registerError", "<p class=\"error-message\">*That email address is already in use.</p>");
-				request.getRequestDispatcher("/login.jsp").forward(request, response); 
-				return;
+			if (errorMessage != null) {
+				request.setAttribute("registerError", "<p class=\"error-message\">" + errorMessage + "</p>");
+	            request.getRequestDispatcher("/login.jsp").forward(request, response); 
+			} else {
+				//Register user to database
+				response.sendRedirect("");
+				out.println("Submitted!");
 			}
-			
-			// Registration successful
-			//response.sendRedirect("");
-			out.println("Submitted registration!");
 		}
 		
 		out.close();
 	}
 	
-	private boolean verifyEmail(String email) {
-		//required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$
-		return !email.isBlank();
+	private boolean validEmail(String email) {
+		if (email.isBlank()) { return false; }
+		Pattern zipPattern = Pattern.compile("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$");
+	    return zipPattern.matcher(email).matches();
 	}
 }
