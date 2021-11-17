@@ -13,14 +13,15 @@
   		<nav>
   			<a href="home.jsp" class="no-style" id="logo">SalEats!</a>
   			<span id="buttons">
-  			<%
-  				if (null != request.getAttribute("loginSuccess")) {
-		        	out.println("<a href=\"home.jsp\" class=\"no-style\" id=\"home\">Home</a>");
-		   		} else {
-		        	out.println("<a href=\"home.jsp\" class=\"no-style\" id=\"home\">Home</a>");
-		        	out.println("<a href=\"login.jsp\" class=\"no-style\">Login / Register</a>");
-		    	}
-		  	%>
+	  			<a href="home.jsp" class="no-style" id="home">Home</a>
+	  			<%
+	  				if (null != request.getSession().getAttribute("name")) {
+			        	out.println("<a href=\"favorites.jsp\" class=\"no-style\" id=\"favorites\">Favorites</a>");
+			        	out.println("<a href=\"auth\" class=\"no-style\">Logout</a>");
+			   		} else {
+			        	out.println("<a href=\"login.jsp\" class=\"no-style\">Login / Register</a>");
+			    	}
+			  	%>
   			</span>
   		</nav>
   	</header>

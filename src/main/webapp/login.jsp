@@ -14,9 +14,16 @@
   	<header>
   		<nav>
   			<a href="home.jsp" class="no-style" id="logo">SalEats!</a>
-  			<span id="buttons">  			
+  			<span id="buttons">
 	  			<a href="home.jsp" class="no-style" id="home">Home</a>
-		  		<a href="login.jsp" class="no-style">Login / Register</a>
+	  			<%
+	  				if (null != request.getSession().getAttribute("name")) {
+			        	out.println("<a href=\"favorites.jsp\" class=\"no-style\" id=\"favorites\">Favorites</a>");
+			        	out.println("<a href=\"auth\" class=\"no-style\">Logout</a>");
+			   		} else {
+			        	out.println("<a href=\"login.jsp\" class=\"no-style\">Login / Register</a>");
+			    	}
+			  	%>
   			</span>
   		</nav>
   	</header>

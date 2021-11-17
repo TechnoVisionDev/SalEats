@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.regex.Pattern;
 
@@ -12,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Handles user authentication for login and registration.
@@ -31,9 +31,6 @@ public class AuthServlet extends HttpServlet {
 	 * Retrieves sensitive data from authentication form.
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		
 		// Login form submitted
 		if (request.getParameter("login") != null) {
 			String email = request.getParameter("email");
@@ -52,7 +49,9 @@ public class AuthServlet extends HttpServlet {
 			if (errorMessage != null) {
 				request.setAttribute("loginError", "<p class=\"error-message\">" + errorMessage + "</p>");
 	            request.getRequestDispatcher("/login.jsp").forward(request, response); 
-			} else {                                     
+			} else {
+				// Create login session for user
+				request.getSession().setAttribute("name", "tempName");
 	            request.getRequestDispatcher("/home.jsp").forward(request, response); 
 			}	
 		}
@@ -78,24 +77,37 @@ public class AuthServlet extends HttpServlet {
 			} else if (terms == null) {
 				errorMessage = "*You must agree to the terms of service.";
 			} else {
-				try { db.registerUser(new User(email, name, password));
+				try { 
+					// Register user to database
+					db.registerUser(new User(email, name, password));
+					request.getSession().setAttribute("name", "tempName");
+		            request.getRequestDispatcher("/home.jsp").forward(request, response);
+		            return;
 				} catch (SQLIntegrityConstraintViolationException e) {
 					errorMessage = "*That email address is already in use.";
 				}
 			}
 			
-			if (errorMessage != null) {
-				request.setAttribute("registerError", "<p class=\"error-message\">" + errorMessage + "</p>");
-	            request.getRequestDispatcher("/login.jsp").forward(request, response); 
-			} else {
-				//Register user to database
-				request.getRequestDispatcher("/home.jsp").forward(request, response); 
-			}
+			// Registration failed, send error message
+			request.setAttribute("registerError", "<p class=\"error-message\">" + errorMessage + "</p>");
+	        request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
-		
-		out.close();
 	}
 	
+	/**
+	 * Executes when a user logs out, closing their session.
+	 */
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("name") != null){
+            session.removeAttribute("name");
+            request.getRequestDispatcher("/home.jsp").forward(request, response); 
+        }
+	}
+	
+	/**
+	 * Verifies that an email follows valid regex pattern.
+	 */
 	private boolean validEmail(String email) {
 		if (email.isBlank()) { return false; }
 		Pattern zipPattern = Pattern.compile("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$");
