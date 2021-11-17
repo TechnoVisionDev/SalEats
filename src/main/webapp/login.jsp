@@ -35,7 +35,7 @@
 						%>
 		  			</div>
 	  				<label>Email</label>
-	  				<input type="text" class="textbox" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+	  				<input type="email" class="textbox" name="email" required>
 	  				<label>Password</label>
 	  				<input type="password" class="textbox" name="password" required pattern="\S(.*\S)?">
 	  				<button type="submit" name="login" class="login-button"><i class="fas fa-sign-in-alt"></i>Sign In</button>
@@ -55,7 +55,7 @@
 						%>
 		  			</div>
   				<label>Email</label>
-  				<input type="text" class="textbox" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+  				<input type="text" class="textbox" name="email" required>
   				<label>Name</label>
   				<input type="text" class="textbox" name="name" required pattern="\S(.*\S)?">
   				<label>Password</label>

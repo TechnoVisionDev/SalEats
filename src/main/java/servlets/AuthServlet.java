@@ -38,15 +38,23 @@ public class AuthServlet extends HttpServlet {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			
-			// Check for valid email and password combo
-			if (db.validate(email, password)) {
-				out.println("Successfully logged in!");
-				return;
+			// Server side validation
+			String errorMessage = null;
+			if (!verifyEmail(email)) {
+				errorMessage = "*Please enter a valid email address.";
+			} else if (password.isBlank()) {
+				errorMessage = "*Please enter a password.";
+			} else if (!db.validate(email, password)) {
+				errorMessage = "*Invalid email and password.";
+			} 
+			
+			if (errorMessage != null) {
+				request.setAttribute("loginError", "<p class=\"error-message\">" + errorMessage + "</p>");
+	            request.getRequestDispatcher("/login.jsp").forward(request, response); 
+			} else {
+				out.println("Submitted!");
 			}
 			
-			// Login failed
-			request.setAttribute("loginError", "<p class=\"error-message\">*Invalid email and password.</p>");
-            request.getRequestDispatcher("/login.jsp").forward(request, response); 
 		}
 		
 		// Registration form submitted
@@ -79,5 +87,10 @@ public class AuthServlet extends HttpServlet {
 		}
 		
 		out.close();
+	}
+	
+	private boolean verifyEmail(String email) {
+		//required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$
+		return !email.isBlank();
 	}
 }
