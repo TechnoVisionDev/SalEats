@@ -52,10 +52,9 @@ public class AuthServlet extends HttpServlet {
 			if (errorMessage != null) {
 				request.setAttribute("loginError", "<p class=\"error-message\">" + errorMessage + "</p>");
 	            request.getRequestDispatcher("/login.jsp").forward(request, response); 
-			} else {
-				out.println("Submitted!");
-			}
-			
+			} else {                                     
+	            request.getRequestDispatcher("/home.jsp").forward(request, response); 
+			}	
 		}
 		
 		// Registration form submitted
@@ -90,8 +89,7 @@ public class AuthServlet extends HttpServlet {
 	            request.getRequestDispatcher("/login.jsp").forward(request, response); 
 			} else {
 				//Register user to database
-				response.sendRedirect("");
-				out.println("Submitted!");
+				request.getRequestDispatcher("/home.jsp").forward(request, response); 
 			}
 		}
 		

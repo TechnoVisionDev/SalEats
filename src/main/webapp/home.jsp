@@ -11,10 +11,16 @@
   <body>
   	<header>
   		<nav>
-  			<a href="home.html" class="no-style" id="logo">SalEats!</a>
-  			<span id="buttons">  			
-	  			<a href="home.html" class="no-style" id="home">Home</a>
-		  		<a href="login.jsp" class="no-style">Login / Register</a>
+  			<a href="home.jsp" class="no-style" id="logo">SalEats!</a>
+  			<span id="buttons">
+  			<%
+  				if (null != request.getAttribute("loginSuccess")) {
+		        	out.println("<a href=\"home.jsp\" class=\"no-style\" id=\"home\">Home</a>");
+		   		} else {
+		        	out.println("<a href=\"home.jsp\" class=\"no-style\" id=\"home\">Home</a>");
+		        	out.println("<a href=\"login.jsp\" class=\"no-style\">Login / Register</a>");
+		    	}
+		  	%>
   			</span>
   		</nav>
   	</header>

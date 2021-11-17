@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300;500&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -12,6 +11,7 @@ html, body {
 body {
    	width:100%;
    	font-family: Roboto, sans-serif;
+   	font-weight: 300;
   	color: grey;
 }
 
@@ -158,14 +158,6 @@ main .form-container {
 
 #divider {
 	border-bottom: 1px solid #ebebeb;
-}
-
-#google {
-	background-color: #469ffe;
-}
-
-#google:hover {
-	background-color: #2d85e3;
 }
 
 footer {
