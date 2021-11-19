@@ -7,7 +7,8 @@
     <meta name="google-signin-client_id" content="781478761130-91a5gnruq0k6to9v44938rdbolmoqdct.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://kit.fontawesome.com/4b6d728af0.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="js/google-login.js"></script>
+    <link rel="stylesheet" href="css/style.css">
     <title>SalEats</title>
   </head>
   <body>
@@ -49,29 +50,6 @@
 	  			</form>
 	  			<p id="divider"></p>
 				<div class="g-signin2" data-onsuccess="onSignIn" data-width="425" data-height="40" data-longtitle="true" data-theme="dark"></div>
- 				<script>
-  					function onSignIn(googleUser) {
-  						// Prevent auto sign in
-  					  	gapi.auth2.getAuthInstance().disconnect();
-  						
-  					  	// Create dynamic form
-  						var form = document.createElement("form");
-  						form.action = "auth";
-  						form.method = "POST";
-  					    
-  						// Add user name to form 
-  						var profile = googleUser.getBasicProfile();
-  					    var element = document.createElement("input");
-  					    element.type = "hidden";
-  					 	element.name = "google-name";
-  						element.value = profile.getName();
-  					 	form.appendChild(element)
-  					 	
-  					 	// Submit form to servlet
-  					    document.body.appendChild(form);
-  					 	form.submit();
-  					}
-  				</script>
   			</div>
   			<form class="login-form" action="auth" method="POST">
 	  				<div>
