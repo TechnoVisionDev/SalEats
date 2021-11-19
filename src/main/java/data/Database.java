@@ -12,6 +12,10 @@ import java.sql.SQLIntegrityConstraintViolationException;
  * @author Thomas Peters
  */
 public class Database {
+	
+	private static String MYSQL_KEY = "jdbc:mysql://localhost:3306/auth";
+	private static String USERNAME = "root";
+	private static String PASSWORD = "password";
 
 	/**
 	 * Adds a user object to the MySQL database.
@@ -23,7 +27,7 @@ public class Database {
 		try {
 			// Connect to database
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/auth", "root", "password");
+			Connection conn = DriverManager.getConnection(MYSQL_KEY, USERNAME, PASSWORD);
 			
 			// Insert new user to database
 			PreparedStatement statement = conn.prepareStatement(INSERT_USERS_SQL);
@@ -50,7 +54,7 @@ public class Database {
 		try {
 			// Connect to database
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/auth", "root", "password");
+			Connection conn = DriverManager.getConnection(MYSQL_KEY, USERNAME, PASSWORD);
 			
 			// Check if email and password match 
 			PreparedStatement statement = conn.prepareStatement(SELECT_USERS_SQL);
@@ -73,7 +77,7 @@ public class Database {
 		try {
 			// Connect to database
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/auth", "root", "password");
+			Connection conn = DriverManager.getConnection(MYSQL_KEY, USERNAME, PASSWORD);
 			
 			// Grab queried name
 			PreparedStatement statement = conn.prepareStatement(SELECT_NAME_SQL);
