@@ -63,4 +63,23 @@ public class Database {
 		} catch (SQLException | ClassNotFoundException e) {}
 		return status;
 	}
+	
+	/**
+	 * Access the name associated with a specified email
+	 * @return queried name or "Username" if null
+	 */
+	public String getName(String email) {
+		String SELECT_NAME_SQL = "SELECT name FROM users WHERE email = " + email;
+		try {
+			// Connect to database
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/auth", "root", "password");
+			
+			// Grab queried name
+			PreparedStatement statement = conn.prepareStatement(SELECT_NAME_SQL);
+			ResultSet rs = statement.executeQuery();
+			return rs.getString("name");
+		} catch (SQLException | ClassNotFoundException e) {}
+		return "Username";
+	}
 }

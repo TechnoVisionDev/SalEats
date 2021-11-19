@@ -59,8 +59,7 @@ public class AuthServlet extends HttpServlet {
 	            request.getRequestDispatcher("/login.jsp").forward(request, response); 
 			} else {
 				// Create login session for user
-				String name = "";
-				request.getSession().setAttribute("name", name);
+				request.getSession().setAttribute("name", db.getName(email));
 	            request.getRequestDispatcher("/home.jsp").forward(request, response); 
 			}	
 		}
