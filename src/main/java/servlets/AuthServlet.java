@@ -31,8 +31,16 @@ public class AuthServlet extends HttpServlet {
 	 * Retrieves sensitive data from authentication form.
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// User signed in with Google
+		if (request.getParameter("google-name") != null) {
+			// Create login session for user
+			request.getSession().setAttribute("name", request.getParameter("google-name"));
+            request.getRequestDispatcher("/home.jsp").forward(request, response); 
+		}
+		
 		// Login form submitted
-		if (request.getParameter("login") != null) {
+		else if (request.getParameter("login") != null) {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			
@@ -51,7 +59,8 @@ public class AuthServlet extends HttpServlet {
 	            request.getRequestDispatcher("/login.jsp").forward(request, response); 
 			} else {
 				// Create login session for user
-				request.getSession().setAttribute("name", "tempName");
+				String name = "";
+				request.getSession().setAttribute("name", name);
 	            request.getRequestDispatcher("/home.jsp").forward(request, response); 
 			}	
 		}
@@ -80,7 +89,7 @@ public class AuthServlet extends HttpServlet {
 				try { 
 					// Register user to database
 					db.registerUser(new User(email, name, password));
-					request.getSession().setAttribute("name", "tempName");
+					request.getSession().setAttribute("name", name);
 		            request.getRequestDispatcher("/home.jsp").forward(request, response);
 		            return;
 				} catch (SQLIntegrityConstraintViolationException e) {

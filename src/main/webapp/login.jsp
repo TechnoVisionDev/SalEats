@@ -48,7 +48,24 @@
 	  				<button type="submit" name="login" class="login-button"><i class="fas fa-sign-in-alt"></i>Sign In</button>
 	  			</form>
 	  			<p id="divider"></p>
-				<div class="g-signin2" data-onsuccess="onSignIn" data-width="425" data-height="40" data-longtitle="true" data-theme="dark" redirect_uri="/home.html"></div>
+				<div class="g-signin2" data-onsuccess="onSignIn" data-width="425" data-height="40" data-longtitle="true" data-theme="dark"></div>
+ 				<script>
+  					function onSignIn(googleUser) {
+  						var profile = googleUser.getBasicProfile();
+  						var form = document.createElement("form");
+  						form.action = "auth";
+  						form.method = "POST";
+  					    
+  					    var element = document.createElement("input");
+  					    element.type = "hidden";
+  					 	element.name = "google-name";
+  						element.value = profile.getName();
+  					 	form.appendChild(element)
+  					 	
+  					    document.body.appendChild(form);
+  					 	form.submit();
+  					}
+  				</script>
   			</div>
   			<form class="login-form" action="auth" method="POST">
 	  				<div>
