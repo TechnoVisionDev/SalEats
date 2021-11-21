@@ -14,5 +14,11 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="/Users/thomaspeters/Desktop/CSCI201/Assignments/PA4/src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.27.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/gson-2.8.6.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/okhttp-4.8.0.jar"/>
+	<classpathentry kind="lib" path="/Users/thomaspeters/Desktop/CSCI201/Assignments/PA4/src/main/webapp/WEB-INF/lib/annotations-13.0.jar"/>
+	<classpathentry kind="lib" path="/Users/thomaspeters/Desktop/CSCI201/Assignments/PA4/src/main/webapp/WEB-INF/lib/kotlin-stdlib-1.3.72.jar"/>
+	<classpathentry kind="lib" path="/Users/thomaspeters/Desktop/CSCI201/Assignments/PA4/src/main/webapp/WEB-INF/lib/kotlin-stdlib-common-1.3.70.jar"/>
+	<classpathentry kind="lib" path="/Users/thomaspeters/Desktop/CSCI201/Assignments/PA4/src/main/webapp/WEB-INF/lib/okio-2.7.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

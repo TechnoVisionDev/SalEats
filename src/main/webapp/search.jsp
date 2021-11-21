@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,7 +27,6 @@
   		</nav>
   	</header>
   	<main>
-  		<img id="banner" src="images/banner.jpg">
   		<div>
 	  		<form action="search" method="GET">
 	  			<div class="form-container">
@@ -68,6 +68,19 @@
 				</div>
 	  		</form>
   		</div>
+  		<h1 id="results-header">Results for <%= request.getAttribute("search")%></h1>
+  		<div id="results-container">
+			<c:forEach var="restaurant" items="${data}">
+				<div class="result">
+					<img src="${restaurant.image_url}" alt="Image of ${restaurant.name}">
+					<div class="result-info">
+						<h2>${restaurant.name}</h2>
+						<p>${restaurant.location}</p>
+						<a href="${restaurant.url}" target="_blank" id="yelp-link">Yelp Link</a>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
   	</main>
   	<footer>
   		<p>&copy; 2021 All Rights Reserved.</p>

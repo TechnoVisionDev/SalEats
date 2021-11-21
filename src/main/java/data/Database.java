@@ -13,10 +13,11 @@ import java.sql.SQLIntegrityConstraintViolationException;
  */
 public class Database {
 	
-	private static String MYSQL_KEY = "jdbc:mysql://localhost:3306/auth";
-	private static String USERNAME = "root";
+	private static String DRIVER = "com.mysql.cj.jdbc.Driver";
+	private static String ADDRESS = "jdbc:mysql://localhost:3306/auth";
+	private static String USER = "root";
 	private static String PASSWORD = "password";
-
+	
 	/**
 	 * Adds a user object to the MySQL database.
 	 * @return Statement result integer.
@@ -26,8 +27,8 @@ public class Database {
 		int result = 0;
 		try {
 			// Connect to database
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection(MYSQL_KEY, USERNAME, PASSWORD);
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(ADDRESS, USER, PASSWORD);
 			
 			// Insert new user to database
 			PreparedStatement statement = conn.prepareStatement(INSERT_USERS_SQL);
@@ -53,8 +54,8 @@ public class Database {
 		boolean status = false;
 		try {
 			// Connect to database
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection(MYSQL_KEY, USERNAME, PASSWORD);
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(ADDRESS, USER, PASSWORD);
 			
 			// Check if email and password match 
 			PreparedStatement statement = conn.prepareStatement(SELECT_USERS_SQL);
@@ -76,12 +77,13 @@ public class Database {
 		String SELECT_NAME_SQL = "SELECT name FROM users WHERE email = " + email;
 		try {
 			// Connect to database
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection(MYSQL_KEY, USERNAME, PASSWORD);
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(ADDRESS, USER, PASSWORD);
 			
 			// Grab queried name
 			PreparedStatement statement = conn.prepareStatement(SELECT_NAME_SQL);
 			ResultSet rs = statement.executeQuery();
+			conn.close();
 			return rs.getString("name");
 		} catch (SQLException | ClassNotFoundException e) {}
 		return "Username";
