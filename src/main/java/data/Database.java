@@ -14,7 +14,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class Database {
 	
 	private static String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static String ADDRESS = "jdbc:mysql://localhost:3306/auth";
+	private static String ADDRESS = "jdbc:mysql://localhost:3306/sal_eats";
 	private static String USER = "root";
 	private static String PASSWORD = "password";
 	
