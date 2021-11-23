@@ -10,6 +10,5 @@ Run the setup.sql script to create the necessary database and tables.
 - MySQL v8.0.27
 - JDBC v8.0.27
 - HTML/CSS
-- JDBC
-- JSP
-- JSTL
+- JSTL v2.0.0
+- GSON v2.8.6
