@@ -26,18 +26,16 @@ public class SearchServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String restaurant = request.getParameter("restaurant");
 		String location = request.getParameter("location");
-		String terms = request.getParameter("search_terms");
+		String sort = request.getParameter("sort");
 		
 		// Validate that all fields are filled out
-		if (restaurant.isBlank() | location.isBlank() | terms == null) {
+		if (restaurant.isBlank() | location.isBlank() | sort == null) {
 			request.getRequestDispatcher("/home.jsp").forward(request, response); 
 			return;
 		}
 		
 		// Search for top 10 matching restaurants
-		List<Restaurant> restaurants = YelpAPIParser.searchRestaurants(restaurant, location);
-		// TODO: Sort by radio button option (terms)
-		
+		List<Restaurant> restaurants = YelpAPIParser.searchRestaurants(restaurant, location, sort);		
 		request.setAttribute("search", restaurant);
 		request.setAttribute("data", restaurants);
 		request.getRequestDispatcher("/search.jsp").forward(request, response); 

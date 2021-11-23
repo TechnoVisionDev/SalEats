@@ -25,12 +25,14 @@ public class YelpAPIParser {
 	 * @param location Location to search for restaurants nearby.
 	 * @return list of 10 restaurants.
 	 */
-    public static List<Restaurant> searchRestaurants(String restaurant, String location) {
+    public static List<Restaurant> searchRestaurants(String restaurant, String location, String sort) {
         try {
             OkHttpClient client = new OkHttpClient().newBuilder().build();
             String builder = "https://api.yelp.com/v3/businesses/search" + "?term=" + restaurant 
             		+ "&location=" + location
+            		+ "&sort_by=" + sort
             		+ "&limit=10";
+            
             Request request = new Request.Builder().url(builder).method("GET", null).addHeader(
                     "Authorization",
                     "Bearer " + API_KEY)

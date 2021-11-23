@@ -185,16 +185,28 @@ main .form-container {
 	gap: 30px;
 }
 
-.result > img {
+#yelp-image {
 	object-fit: cover;
 	border-radius: 15px;
 	height: 250px;
 	width: 250px;
 }
 
-#yelp-link {
-	text-decoration: underline !important;
+#yelp-image:hover {
+	border: 4px solid #bb0000;
+}
+
+.yelp-link {
+	text-decoration: none !important;
 	color: grey;
+}
+
+.yelp-link:hover {
+	color: #bb0000;
+}
+
+#underline {
+	text-decoration: underline !important;
 }
 
 footer {

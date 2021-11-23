@@ -43,23 +43,23 @@
 						<div class="radio-buttons-container">
 							<div>
 					            <label class="radio-element">
-					              <input type="radio" value="Best Match" name="search_terms" checked="checked"/>
+					              <input type="radio" value="best_match" name="sort" checked="checked"/>
 					              Best Match
 					            </label>
 					            <br/>
 					            <label class="radio-element">
-					              <input type="radio" value="Rating" name="search_terms" />
+					              <input type="radio" value="rating" name="sort" />
 					              Rating
 					            </label>
 					        </div>
 				            <div>
 					            <label class="radio-element">
-					              <input type="radio" value="Review Count" name="search_terms" />
+					              <input type="radio" value="review_count" name="sort" />
 					              Review Count
 					            </label>
 					            <br/>
 					            <label class="radio-element">
-					              <input type="radio" value="Distance" name="search_terms" />
+					              <input type="radio" value="distance" name="sort" />
 					              Distance
 					            </label>
 				            </div>
