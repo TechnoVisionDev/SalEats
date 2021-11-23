@@ -12,4 +12,5 @@ Run the setup.sql script to create the necessary database and tables.
 - MySQL v8.0.27
 - JDBC v8.0.27
 - JSTL v2.0.0
-- GSON v2.8.6
+- Gson v2.8.6
+- OkHttp v4.8.0
