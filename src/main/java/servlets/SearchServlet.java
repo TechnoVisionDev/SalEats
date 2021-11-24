@@ -35,7 +35,7 @@ public class SearchServlet extends HttpServlet {
 		}
 		
 		// Search for top 10 matching restaurants
-		List<Restaurant> restaurants = YelpAPIParser.searchRestaurants(restaurant, location, sort);		
+		List<Restaurant> restaurants = YelpAPIParser.searchRestaurants(restaurant, location, sort);
 		request.setAttribute("search", restaurant);
 		request.setAttribute("data", restaurants);
 		request.getRequestDispatcher("/search.jsp").forward(request, response);

@@ -1,6 +1,7 @@
 package yelp;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Represents a Yelp restaurant
@@ -10,6 +11,7 @@ public class Restaurant implements Serializable {
 
 	private static final long serialVersionUID = -6431566946329033409L;
 
+	private String id;
 	private String name;
 	private String image_url;
 	private String url;
@@ -17,6 +19,11 @@ public class Restaurant implements Serializable {
 	private String price;
 	private String phone;
 	private Location location;
+	private List<Category> categories;
+	
+	public String getId() {
+		return id;
+	}
 	
 	public String getName() {
 		return name;
@@ -44,5 +51,9 @@ public class Restaurant implements Serializable {
 	
 	public Location getLocation() {
 		return location;
+	}
+	
+	public List<Category> getCategories() {
+		return categories;
 	}
 }

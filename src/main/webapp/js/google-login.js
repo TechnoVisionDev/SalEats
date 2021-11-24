@@ -12,7 +12,7 @@ function onSignIn(googleUser) {
   var element = document.createElement("input");
   element.type = "hidden";
   element.name = "google-name";
-  element.value = profile.getName();
+  element.value = profile.getGivenName();
   form.appendChild(element)
 
   // Submit form to servlet

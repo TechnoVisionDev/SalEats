@@ -72,11 +72,11 @@
   		<div id="results-container">
 			<c:forEach var="restaurant" items="${data}">
 				<div class="result">
-					<a href="details.jsp" class="no-style">
+					<a href="details?id=${restaurant.id}">
 						<img src="${restaurant.image_url}" alt="Image of ${restaurant.name}" id="yelp-image">
 					</a>
-					<div class="result-info">
-						<h2><a href="details.jsp" class="yelp-link">${restaurant.name}</a></h2>
+					<div>
+						<h2>${restaurant.name}</h2>
 						<p>${restaurant.location}</p>
 						<a href="${restaurant.url}" target="_blank" class="yelp-link" id="underline">Yelp Link</a>
 					</div>

@@ -68,20 +68,34 @@
 				</div>
 	  		</form>
   		</div>
-  		<h1 id="results-header">Results for <%= request.getAttribute("search")%></h1>
+  		<h1 id="results-header"><%= request.getAttribute("search")%></h1>
   		<div id="results-container">
-			<c:forEach var="restaurant" items="${data}">
-				<div class="result">
-					<a href="details.jsp" class="no-style">
-						<img src="${restaurant.image_url}" alt="Image of ${restaurant.name}" id="yelp-image">
-					</a>
-					<div class="result-info">
-						<h2><a href="details.jsp" class="yelp-link">${restaurant.name}</a></h2>
-						<p>${restaurant.location}</p>
-						<a href="${restaurant.url}" target="_blank" class="yelp-link" id="underline">Yelp Link</a>
-					</div>
+  			<div class="result" id="detail">
+				<a href="${restaurant.url}" target="_blank">
+					<img src="${restaurant.image_url}" alt="Image of ${restaurant.name}" id="yelp-image">
+				</a>
+				<div class="result-info">
+					<p>Address: ${restaurant.location}</p>
+					<p>${restaurant.phone}</p>
+					<p>Categories: 
+						<c:forEach var="category" items="${restaurant.categories}" varStatus="loop">
+							${category.title}<c:if test="${!loop.last}">, </c:if>
+						</c:forEach>
+					</p>
+					<p>Price: ${restaurant.price}</p>
+					<p>Rating: 
+						<c:forEach begin="0" end="${restaurant.rating}" varStatus="loop">&#9733; </c:forEach> 
+					</p>
 				</div>
-			</c:forEach>
+			</div>
+			<%
+	  			if (null != request.getSession().getAttribute("name")) {
+			        out.println("<button type=\"submit\" id=\"favorite-button\">");
+			        out.println("<i class=\"fas fa-star\"></i>");
+			        out.println("Add to Favorites");
+			        out.println("</button>");
+			   	}
+			%>
 		</div>
   	</main>
   	<footer>

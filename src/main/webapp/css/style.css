@@ -185,6 +185,14 @@ main .form-container {
 	gap: 30px;
 }
 
+#detail {
+	border: none !important;
+}
+
+.result-info {
+	font-size: 18px;
+}
+
 #yelp-image {
 	object-fit: cover;
 	border-radius: 15px;
@@ -207,6 +215,20 @@ main .form-container {
 
 #underline {
 	text-decoration: underline !important;
+}
+
+#favorite-button {
+	color: grey;
+	background-color: #ffd200;
+	cursor: pointer;
+	font-size: 15px;
+	height: 40px;
+	border: none;
+	border-radius: 3px;
+}
+
+#favorite-button:hover {
+	background-color: #fcca03;
 }
 
 footer {
