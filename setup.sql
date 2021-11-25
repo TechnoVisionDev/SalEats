@@ -6,3 +6,9 @@ CREATE TABLE IF NOT EXISTS `sal_eats`.`users` (
   `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`email`) 
 )
+
+CREATE TABLE IF NOT EXISTS `sal_eats`.`favorites` (
+  `email` VARCHAR(45) NOT NULL,
+  `restaurant` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`email`) 
+);

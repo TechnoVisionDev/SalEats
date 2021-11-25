@@ -65,7 +65,9 @@ public class Database {
 			ResultSet rs = statement.executeQuery();
 			status = rs.next();
 			conn.close();
-		} catch (SQLException | ClassNotFoundException e) {}
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		return status;
 	}
 	
@@ -74,7 +76,8 @@ public class Database {
 	 * @return queried name or "Username" if null
 	 */
 	public String getName(String email) {
-		String SELECT_NAME_SQL = "SELECT name FROM users WHERE email = " + email;
+		String SELECT_NAME_SQL = "SELECT name FROM users WHERE email = '" + email + "'";
+		String result = "User";
 		try {
 			// Connect to database
 			Class.forName(DRIVER);
@@ -83,9 +86,12 @@ public class Database {
 			// Grab queried name
 			PreparedStatement statement = conn.prepareStatement(SELECT_NAME_SQL);
 			ResultSet rs = statement.executeQuery();
+			rs.next();
+			result = rs.getString("name");
 			conn.close();
-			return rs.getString("name");
-		} catch (SQLException | ClassNotFoundException e) {}
-		return "Username";
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }
