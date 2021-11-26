@@ -217,18 +217,29 @@ main .form-container {
 	text-decoration: underline !important;
 }
 
-#favorite-button {
-	color: grey;
+.favorite-button {
+	color: #666666;
 	background-color: #ffd200;
 	cursor: pointer;
 	font-size: 15px;
 	height: 40px;
+	width: 100%;
 	border: none;
 	border-radius: 3px;
 }
 
-#favorite-button:hover {
+.favorite-button:hover {
 	background-color: #fcca03;
+}
+
+#unfavorite {
+	color: white !important;
+	background-color: #bb0000 !important;
+}
+
+#unfavorite:hover {
+	color: white !important;
+	background-color: #c92a2a !important;
 }
 
 footer {

@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
+
+import yelp.Restaurant;
 
 /**
  * Handles interacts with the MySQL database.
@@ -19,7 +23,7 @@ public class Database {
 	private static String PASSWORD = "password";
 	
 	/**
-	 * Adds a user object to the MySQL database.
+	 * Adds a user object to the authentication table
 	 * @return Statement result integer.
 	 */
 	public int registerUser(User user) throws SQLIntegrityConstraintViolationException {
@@ -72,11 +76,11 @@ public class Database {
 	}
 	
 	/**
-	 * Access the name associated with a specified email
-	 * @return queried name or "Username" if null
+	 * Access the name associated with a specified email.
+	 * @return Queried name or "Username" if null.
 	 */
 	public String getName(String email) {
-		String SELECT_NAME_SQL = "SELECT name FROM users WHERE email = '" + email + "'";
+		String SELECT_NAME_SQL = "SELECT name FROM users WHERE email = ?";
 		String result = "User";
 		try {
 			// Connect to database
@@ -85,6 +89,7 @@ public class Database {
 			
 			// Grab queried name
 			PreparedStatement statement = conn.prepareStatement(SELECT_NAME_SQL);
+			statement.setString(1, email);
 			ResultSet rs = statement.executeQuery();
 			rs.next();
 			result = rs.getString("name");
@@ -93,5 +98,101 @@ public class Database {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	/**
+	 * Adds a restaurant ID to the favorites list.
+	 * @return Statement result integer.
+	 */
+	public int addFavorite(String email, String restaurantID) {
+		String INSERT_FAVORITE_SQL = "INSERT INTO favorites (email, restaurant) VALUES (?, ?)";
+		int result = 0;
+		try {
+			// Connect to database
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(ADDRESS, USER, PASSWORD);
+			
+			// Insert new user to database
+			PreparedStatement statement = conn.prepareStatement(INSERT_FAVORITE_SQL);
+			statement.setString(1, email);
+			statement.setString(2, restaurantID);
+			result = statement.executeUpdate();
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * Removes a restaurant ID from the favorites list.
+	 * @return Statement result integer.
+	 */
+	public int removeFavorite(String email, String restaurantID) {
+		String DELETE_FAVORITE_SQL = "DELETE FROM favorites WHERE email = ? AND restaurant = ?";
+		int result = 0;
+		try {
+			// Connect to database
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(ADDRESS, USER, PASSWORD);
+			
+			// Insert new user to database
+			PreparedStatement statement = conn.prepareStatement(DELETE_FAVORITE_SQL);
+			statement.setString(1, email);
+			statement.setString(2, restaurantID);
+			result = statement.executeUpdate();
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * Checks if restaurant is in favorites list
+	 * @return true if restaurant ID is in favorite's list
+	 */
+	public boolean isFavorited(String email, String restaurantID) {
+		String CHECK_FAVORITED_SQL = "SELECT * FROM favorites WHERE email = ? AND restaurant = ?";
+		boolean status = false;
+		try {
+			// Connect to database
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(ADDRESS, USER, PASSWORD);
+			
+			// Check if email and password match 
+			PreparedStatement statement = conn.prepareStatement(CHECK_FAVORITED_SQL);
+			statement.setString(1, email);
+			statement.setString(2, restaurantID);
+	
+			ResultSet rs = statement.executeQuery();
+			status = rs.next();
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
+
+	/**
+	 * Access the list of favorites associated with a specified email.
+	 * @return Queried list of favorite restaurants.
+	 */
+	public List<Restaurant> getFavorites(String email) {
+		String SELECT_FAVORITES_SQL = "SELECT * FROM favorites WHERE email = '" + email + "'";
+		List<Restaurant> favorites = new ArrayList<Restaurant>();
+		try {
+			// Connect to database
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(ADDRESS, USER, PASSWORD);
+			
+			// Grab queried name
+			PreparedStatement statement = conn.prepareStatement(SELECT_FAVORITES_SQL);
+			ResultSet rs = statement.executeQuery();
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return favorites;
 	}
 }

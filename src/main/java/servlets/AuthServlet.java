@@ -35,7 +35,9 @@ public class AuthServlet extends HttpServlet {
 		// User signed in with Google
 		if (request.getParameter("google-name") != null) {
 			// Create login session for user
-			request.getSession().setAttribute("name", request.getParameter("google-name"));
+			HttpSession session = request.getSession();
+			session.setAttribute("name", request.getParameter("google-name"));
+			session.setAttribute("email", request.getParameter("google-email"));
             request.getRequestDispatcher("/home.jsp").forward(request, response); 
 		}
 		
@@ -59,7 +61,9 @@ public class AuthServlet extends HttpServlet {
 	            request.getRequestDispatcher("/login.jsp").forward(request, response); 
 			} else {
 				// Create login session for user
-				request.getSession().setAttribute("name", db.getName(email));
+				HttpSession session = request.getSession();
+				session.setAttribute("name", db.getName(email));
+				session.setAttribute("email", email);
 	            request.getRequestDispatcher("/home.jsp").forward(request, response); 
 			}	
 		}
@@ -88,7 +92,9 @@ public class AuthServlet extends HttpServlet {
 				try { 
 					// Register user to database
 					db.registerUser(new User(email, name, password));
-					request.getSession().setAttribute("name", name);
+					HttpSession session = request.getSession();
+					session.setAttribute("name", name);
+					session.setAttribute("email", email);
 		            request.getRequestDispatcher("/home.jsp").forward(request, response);
 		            return;
 				} catch (SQLIntegrityConstraintViolationException e) {
@@ -109,6 +115,7 @@ public class AuthServlet extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("name") != null){
             session.removeAttribute("name");
+            session.removeAttribute("email");
             request.getRequestDispatcher("/home.jsp").forward(request, response); 
         }
 	}

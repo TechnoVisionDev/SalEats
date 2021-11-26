@@ -60,7 +60,6 @@ public class YelpAPIParser {
         try {
             OkHttpClient client = new OkHttpClient().newBuilder().build();
             String builder = "https://api.yelp.com/v3/businesses/" + id;
-            System.out.println(builder);
             
             Request request = new Request.Builder().url(builder).method("GET",null).addHeader("Authorization","Bearer "+API_KEY).build();
             Response response = client.newCall(request).execute();

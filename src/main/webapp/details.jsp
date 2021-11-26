@@ -88,14 +88,24 @@
 					</p>
 				</div>
 			</div>
-			<%
-	  			if (null != request.getSession().getAttribute("name")) {
-			        out.println("<button type=\"submit\" id=\"favorite-button\">");
-			        out.println("<i class=\"fas fa-star\"></i>");
-			        out.println("Add to Favorites");
-			        out.println("</button>");
-			   	}
-			%>
+			<form action="favorites" method="GET">
+				<input type="hidden" name="id" value="${restaurant.id}">
+				<%
+		  			if (null != request.getSession().getAttribute("name")) {
+		  				if (null != request.getAttribute("isFavorited")) {
+		  					out.println();
+					        out.println("<button type=\"submit\" class=\"favorite-button\" id=\"unfavorite\">");
+					        out.println("<i class=\"fas fa-minus-circle\"></i> Remove from Favorites");
+					        out.println("</button>");
+		  				} else {
+		  					out.println("<input type=\"hidden\" name=\"add\" value=\"true\">");
+					        out.println("<button type=\"submit\" class=\"favorite-button\">");
+					        out.println("<i class=\"fas fa-star\"></i> Add to Favorites");
+					        out.println("</button>");
+		  				}
+				   	}
+				%>
+			</form>
 		</div>
   	</main>
   	<footer>

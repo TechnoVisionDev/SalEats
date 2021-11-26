@@ -9,11 +9,18 @@ function onSignIn(googleUser) {
 
   // Add user name to form
   var profile = googleUser.getBasicProfile();
-  var element = document.createElement("input");
-  element.type = "hidden";
-  element.name = "google-name";
-  element.value = profile.getGivenName();
-  form.appendChild(element)
+  var nameElement = document.createElement("input");
+  nameElement.type = "hidden";
+  nameElement.name = "google-name";
+  nameElement.value = profile.getGivenName();
+  form.appendChild(nameElement)
+
+  // Add user email to form
+  var emailElement = document.createElement("input");
+  emailElement.type = "hidden";
+  emailElement.name = "google-email";
+  emailElement.value = profile.getEmail();
+  form.appendChild(emailElement)
 
   // Submit form to servlet
   document.body.appendChild(form);
