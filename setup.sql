@@ -5,9 +5,11 @@ CREATE TABLE IF NOT EXISTS `sal_eats`.`users` (
   `name` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`email`) 
-)
+);
 
-CREATE TABLE IF NOT EXISTS `sal_eats`.`favorites` (
-  `email` VARCHAR(45) NOT NULL,
-  `restaurant` VARCHAR(45) NOT NULL
+CREATE TABLE `favorites` (
+  `email` varchar(45) NOT NULL,
+  `restaurant` varchar(45) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
 );
