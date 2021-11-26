@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import data.Database;
 import jakarta.servlet.ServletException;
@@ -25,10 +26,16 @@ public class FavoritesServlet extends HttpServlet {
 		db = new Database();
 	}
 	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Restaurant> restaurants = db.getFavorites((String) request.getSession().getAttribute("email"));
+		request.setAttribute("data", restaurants);
+		request.getRequestDispatcher("/favorites.jsp").forward(request, response);
+	}
+	
 	/**
 	 * Adds a new restaurant to the favorites list
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = (String) request.getSession().getAttribute("email");
 		String id = request.getParameter("id");
 		

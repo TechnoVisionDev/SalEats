@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import yelp.Restaurant;
+import yelp.YelpAPIParser;
 
 /**
  * Handles interacts with the MySQL database.
@@ -179,7 +180,7 @@ public class Database {
 	 * @return Queried list of favorite restaurants.
 	 */
 	public List<Restaurant> getFavorites(String email) {
-		String SELECT_FAVORITES_SQL = "SELECT * FROM favorites WHERE email = '" + email + "'";
+		String SELECT_FAVORITES_SQL = "SELECT restaurant FROM favorites WHERE email = ? ORDER BY id DESC";
 		List<Restaurant> favorites = new ArrayList<Restaurant>();
 		try {
 			// Connect to database
@@ -188,7 +189,15 @@ public class Database {
 			
 			// Grab queried name
 			PreparedStatement statement = conn.prepareStatement(SELECT_FAVORITES_SQL);
+			statement.setString(1, email);
+			
 			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
+				Restaurant restaurant = YelpAPIParser.getRestaurant(rs.getString("restaurant"));
+				if (restaurant != null) {
+					favorites.add(restaurant);
+				}
+			}
 			conn.close();
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();

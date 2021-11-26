@@ -15,7 +15,7 @@
   			<a href="home.jsp" class="no-style" id="logo">SalEats!</a>
   			<span id="buttons">
 	  			<a href="home.jsp" class="no-style" id="home">Home</a>
-	  			<a href="favorites.jsp" class="no-style" id="favorites">Favorites</a>
+	  			<a href="favorites" class="no-style" id="favorites">Favorites</a>
 	  			<a href="auth" class="no-style">Logout</a>
 	  			<%
 	  				if (null == request.getSession().getAttribute("name")) {
@@ -69,6 +69,18 @@
   		</div>
   		<h1 id="results-header"><%=request.getSession().getAttribute("name")%>'s Favorites:</h1>
   		<div id="results-container">
+			<c:forEach var="restaurant" items="${data}">
+				<div class="result">
+					<a href="details?id=${restaurant.id}">
+						<img src="${restaurant.image_url}" alt="Image of ${restaurant.name}" id="yelp-image">
+					</a>
+					<div>
+						<h2>${restaurant.name}</h2>
+						<p>${restaurant.location}</p>
+						<a href="${restaurant.url}" target="_blank" class="yelp-link" id="underline">Yelp Link</a>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
   	</main>
   	<footer>
